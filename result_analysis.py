@@ -9,7 +9,7 @@ files = os.listdir(cwd)
 
 main_data = pd.DataFrame()
 # capital = 10000
-files = files[:-1]
+# files = files[:-1]
 for file in files:
     # break
     flag = 0
