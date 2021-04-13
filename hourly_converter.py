@@ -6,7 +6,7 @@ import pandas as pd
 
 def convert_data(df):
     times = [(time(9, 15), time(10, 15)), (time(10, 15), time(11, 15)), (time(11, 15), time(12, 15)),
-             (time(12, 15), time(13, 15)), (time(14, 15), time(15, 15))]
+             (time(12, 15), time(13, 15)), (time(13, 15), time(14, 15)), (time(14, 15), time(15, 15))]
 
     data = pd.DataFrame()
     for tup in times:
