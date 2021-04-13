@@ -76,13 +76,13 @@ for e in df_5min.index:
     buy_condition = False
     buy_condition = df_5min.loc[e, '2DEMA'] > df_5min.loc[e, '10DEMA'] and df_5min.loc[
         e - timedelta(minutes=5), '2DEMA'] < \
-                    df_5min.loc[e - timedelta(minutes=5), '10DEMA'] and df_5min.loc[e, 'Pre_RSI'] < 30 and df_5min.loc[
-                        e, 'RSI'] > df_5min.loc[e, 'Pre_RSI'] and e.time() < time(15, 15)
+                    df_5min.loc[e - timedelta(minutes=5), '10DEMA'] and 60 < df_5min.loc[e, 'Pre_RSI'] < df_5min.loc[
+                        e, 'RSI'] and e.time() < time(15, 15)
 
     if buy_condition and port.status == 0:
         bp = df_5min.loc[e, 'Close']
         tgt1 = bp + df_5min.loc[e, 'ATR'] * 2
-        tgt2 = bp + df_5min.loc[e, 'ATR'] * 3
+        tgt2 = bp + df_5min.loc[e, 'ATR'] * 4
         sl = bp - df_5min.loc[e, 'ATR'] * 2
         qty = int(500 / (bp - sl))
         port.buy(df_5min.loc[e, 'Close'], e, qty)
@@ -96,6 +96,7 @@ for e in df_5min.index:
             port.book_partial(tgt1, e, qty)
             port.partial_status = 1
         elif df_5min.loc[e, 'High'] > tgt2 and e.time() < dt.datetime(2020, 2,
+                                                                      2, 15,
                                                                       2, 15,
                                                                       15).time():
             port.target(tgt2, e, qty)
